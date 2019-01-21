@@ -46,7 +46,18 @@ int main(int argc, const char * argv[]) {
     //list[3] = new sphere (vec3(-1,0,-1), 0.5, new metal(vec3(0.8,0.8,0.8)));
 
     hitable *world = new hitable_list(list, 2);
-    camera cam(vec3(-2,2,1),vec3(0,0,-1), vec3(0,1,0), 90, float(nx)/float(ny));
+    vec3 lookfrom(3,3,2);
+    vec3 lookat(0,0,-1);
+    float dist_to_focus = (lookfrom-lookat).length();
+    float aperture = 2.0;
+    camera cam(lookfrom,
+               lookat,
+               vec3(0,1,0),
+               20,
+               float(nx)/float(ny),
+               aperture,
+               dist_to_focus
+     );
 
     for(int j = ny-1; j >= 0; j--){
         for(int i = 0; i < nx; i++){
